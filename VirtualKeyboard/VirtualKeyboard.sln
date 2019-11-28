@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2015
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualKeyboard.CSharp", "VirtualKeyboard.CSharp.csproj", "{E6EF7522-7202-AA04-9492-ADF45480FA7F}"
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{2B33D4B7-768F-B021-459E-EAA18BB8F7BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,10 +9,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E6EF7522-7202-AA04-9492-ADF45480FA7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E6EF7522-7202-AA04-9492-ADF45480FA7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E6EF7522-7202-AA04-9492-ADF45480FA7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E6EF7522-7202-AA04-9492-ADF45480FA7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B33D4B7-768F-B021-459E-EAA18BB8F7BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B33D4B7-768F-B021-459E-EAA18BB8F7BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B33D4B7-768F-B021-459E-EAA18BB8F7BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B33D4B7-768F-B021-459E-EAA18BB8F7BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
