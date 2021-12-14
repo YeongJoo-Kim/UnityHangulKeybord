@@ -5,7 +5,7 @@ public class VirtualTextInputBox : MonoBehaviour {
 
 	AutomateKR		mAutomateKR = new AutomateKR();
     protected UnityEngine.UI.InputField mTextField = null;
-    protected string TextField
+    public string TextField
     {
         set
         {
@@ -72,5 +72,10 @@ public class VirtualTextInputBox : MonoBehaviour {
         }
 
         TextField = mAutomateKR.completeText + mAutomateKR.ingWord;
+    }
+
+    public AutomateKR.HAN_STATUS GetStatus()
+    {
+        return mAutomateKR.GetStatus();
     }
 }

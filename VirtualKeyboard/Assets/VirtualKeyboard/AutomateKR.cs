@@ -43,7 +43,16 @@ public class AutomateKR {
 		{'m', 37},	{'M', 37},
 	};
 
-    enum HAN_STATUS		// 단어조합상태
+    // 초성, 중성, 종성 테이블.
+    static string SOUND_TABLE =
+    /* 초성 19자 0 ~ 18 */
+    "ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ" +
+    /* 중성 21자 19 ~ 39 */
+    "ㅏㅐㅑㅒㅓㅔㅕㅖㅗㅘㅙㅚㅛㅜㅝㅞㅟㅠㅡㅢㅣ" +
+    /* 종성 28자 40 ~ 67 */
+    " ㄱㄲㄳㄴㄵㄶㄷㄹㄺㄻㄼㄽㄾㄿㅀㅁㅂㅄㅅㅆㅇㅈㅊㅋㅌㅍㅎ";
+
+    public enum HAN_STATUS		// 단어조합상태
     {
         HS_FIRST = 0,		// 초성
         HS_FIRST_V,			// 자음 + 자음 
@@ -66,14 +75,7 @@ public class AutomateKR {
 
 	string	m_completeWord;	// 완성글자
 
-    // 초성, 중성, 종성 테이블.
-    string SOUND_TABLE = 
-	/* 초성 19자 0 ~ 18 */
-	"ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ" + 
-	/* 중성 21자 19 ~ 39 */
-	"ㅏㅐㅑㅒㅓㅔㅕㅖㅗㅘㅙㅚㅛㅜㅝㅞㅟㅠㅡㅢㅣ" +
-	/* 종성 28자 40 ~ 67 */
-	" ㄱㄲㄳㄴㄵㄶㄷㄹㄺㄻㄼㄽㄾㄿㅀㅁㅂㅄㅅㅆㅇㅈㅊㅋㅌㅍㅎ";
+
 
     // 초성 합성 테이블
     int[,] MIXED_CHO_CONSON = new int[14,3]
@@ -99,7 +101,7 @@ public class AutomateKR {
     };
 
     // 초성,중성 모음 합성 테이블
-    int[,] MIXED_VOWEL = new int[21,3] {
+    int[,] MIXED_VOWEL = new int[22,3] {
 	    {19,19,21},	// ㅏ,ㅏ,ㅑ
 	    {21,19,19},	// ㅑ,ㅏ,ㅏ
 
@@ -116,6 +118,7 @@ public class AutomateKR {
 	    {31,27,27},	// ㅛ,ㅗ,ㅗ
 
 	    {27,19,28},	// ㅗ,ㅏ,ㅘ
+        {27,20,29},	// ㅗ,ㅐ,ㅙ
 	    {28,39,29},	// ㅘ,ㅣ,ㅙ
 
 	    {27,39,30},	// ㅗ,ㅣ,ㅚ
@@ -199,15 +202,28 @@ public class AutomateKR {
 	    m_completeWord	= null;
     }
 
-	// Use this for initiaization
-	void Start () {
-		Clear();
+    static public char GetHangulSound(char c)
+    {
+        int index = -1;
+        if(HANGULE_KEY_TABLE.ContainsKey(c))
+        {
+            index = HANGULE_KEY_TABLE[c];
+        }
+
+        if(index < 0)
+        {
+            return '\0';
+        }
+
+        return SOUND_TABLE[index];
 	}
-	
-	// Update is caed once per frame
-	void Update () {
-	
+
+
+    public HAN_STATUS GetStatus()
+    {
+        return m_nStatus;
 	}
+
     public void SetKeyString(char str)
     {
         m_nStatus = HAN_STATUS.HS_FIRST;
@@ -358,7 +374,8 @@ public class AutomateKR {
                     {
                         m_completeWord = CombineHangle(1);
                         m_nPhonemez[0] = nKeyCode;
-                        m_nStatus = HAN_STATUS.HS_FIRST;
+                        m_nStatus = (nKeyCode > 18) ? HAN_STATUS.HS_FIRST_C : HAN_STATUS.HS_FIRST_V;
+                        //m_nStatus = HAN_STATUS.HS_FIRST;
                     }
                 }
                 break;
@@ -595,7 +612,7 @@ public class AutomateKR {
 			    return true;
 		    }
 	    }
-	    while(++i< 21);
+	    while(++i< 22);
 
 	    return false;
     }
